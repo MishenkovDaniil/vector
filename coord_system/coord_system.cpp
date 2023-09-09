@@ -22,6 +22,9 @@ Coord_system:: ~Coord_system ()
     delete ordinate;
 };
 
+void Coord_system::start (Point &point) { point.x_ = x_start_; point.y_ = y_start_;};
+
+
 void Coord_system::draw (sf::RenderWindow &window)
 {
     assert (abscissa && ordinate);

@@ -63,9 +63,9 @@ void Vector::draw (const Coord_system &coord_system, sf::RenderWindow &window, c
 
     Point arrow_start(start.x_ + this->x_coord, start.y_ + this->y_coord);
 
-    draw_line (coord_system, window, start);
-    arrow_l.draw_line (coord_system, window, arrow_start);
-    arrow_r.draw_line (coord_system, window, arrow_start);
+    draw_line (*this, coord_system, window, start);
+    draw_line (arrow_l, coord_system, window, arrow_start);
+    draw_line (arrow_r, coord_system, window, arrow_start);
     
     normal.~Vector ();
     opposite.~Vector ();
@@ -74,15 +74,15 @@ void Vector::draw (const Coord_system &coord_system, sf::RenderWindow &window, c
     arrow_start.~Point ();
 }
 
-void Vector::draw_line (const Coord_system &coord_system, sf::RenderWindow &window, const Point start)
+void draw_line (const Vector &vec, const Coord_system &coord_system, sf::RenderWindow &window, const Point start)
 {
     sf::VertexArray lines(sf::Lines, 2);
 
     Point real_start (start.x_ + coord_system.x_start_, -start.y_ + coord_system.y_start_);
 
     lines[0].position = sf::Vector2f(real_start.x_, real_start.y_);
-    lines[1].position = sf::Vector2f(real_start.x_ + this->x_coord, real_start.y_ - this->y_coord);
-    lines[0].color = lines[1].color = this->color_;
+    lines[1].position = sf::Vector2f(real_start.x_ + vec.x_coord, real_start.y_ - vec.y_coord);
+    lines[0].color = lines[1].color = vec.color_;
 
     window.draw (lines);
 }

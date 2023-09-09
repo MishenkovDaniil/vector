@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 
 class Coord_system;
+class Vector;
+// void draw_line (const Vector &vec, const Coord_system &coord_system, sf::RenderWindow &window, const Point start);
 #include "../coord_system/coord_system.h"
 
 class Point 
@@ -21,7 +23,6 @@ public:
 
 class Vector 
 {
-    public://
     double x_coord = 0;
     double y_coord = 0;
     sf::Color color_ = sf::Color ();
@@ -36,7 +37,7 @@ public:
     Vector operator = (const Vector &vec_a);
     Vector operator - ();
 private:
-    void draw_line (const Coord_system &coord_system, sf::RenderWindow &window, const Point start);
+    friend void draw_line (const Vector &vec, const Coord_system &coord_system, sf::RenderWindow &window, const Point start);
 };
 
 
